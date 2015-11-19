@@ -1,0 +1,58 @@
+{%extends 'default/layout/block.html.twig' %}
+            
+ {%block sidebar %}
+    {%for cat in cate%}
+            <h3 class="titles">{{cat['name_' ~ lang]}}</h3>
+        {%endfor%}
+            <ul class="mainmenu sidebar-list">
+                {%if service is defined%}
+                    {%for serv in service%}                         
+                    <li><a href="{{url('getPost',{alias:serv.alias})}}">{{serv['title_'~ lang]}}</a></li>
+                {%endfor%}
+                {%else%}
+                    {%for serv in services%}                         
+                        <li><a href="{{ url('listCate', {target: serv.target}) }}">{{serv['name_'~ lang]}}</a></li>
+                    {%endfor%}
+                {%endif%}
+            </ul>      
+                    
+    <hr style="border-top: 1px solid #cecece;"/>
+ {%endblock%}  
+
+{%block content_middle%}
+<div class="middles">
+    <div class="service_">
+        {%for cat in cate%}
+            <h3 class="titles">{{cat['name_' ~ lang]}}</h3>
+        {%endfor%}
+            <ul class="mainmenu sidebar-list">
+                {%if service is defined%}
+                    {%for serv in service%}                         
+                    <li><a href="{{url('getPost',{alias:serv.alias})}}">{{serv['title_'~ lang]|limitword(5)}}</a></li>
+                {%endfor%}
+                {%else%}
+                    {%for serv in services%}                         
+                        <li><a href="{{ url('listCate', {target: serv.target}) }}">{{serv['name_'~ lang]|limitword(5)}}</a></li>
+                    {%endfor%}
+                {%endif%}
+            </ul> 
+    </div>
+    <div class="all-news">
+            {%for c in cates%}
+            <div class="{%if c.id==4 %} {%else%}not-resp{%endif%}">
+                
+                    <h3 class="titles">{{c['name_'~ lang]}}</h3>
+                {%endfor%}
+            
+            {%for ns in news%}
+                <div class="news">
+                    <div class="news-img"><a href="#" ><img src="{{ns.images}}" alt="{{ns['title_' ~lang]}}" /></a></div>
+                        <a href="{{ url('getPost', { alias: ns.alias}) }}" class="news-name">{{ns['title_' ~lang]}}</a>
+                         <div class="clear"></div>
+                </div>
+            {%endfor%}
+            </div>
+    </div>
+    <div class="clear"></div>
+ </div>
+{%endblock%}      

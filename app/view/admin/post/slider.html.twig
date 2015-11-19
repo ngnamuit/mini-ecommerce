@@ -1,0 +1,65 @@
+{% extends 'admin/layout/index.html.twig' %}
+{% block content %}
+<div class="page-header">
+	<h1>
+		{{control}}
+	</h1>
+</div><!-- /.page-header -->
+<div class="row_cate">
+
+	<div class="col-xs-12">
+		<div class="table-header">
+			DANH SÁCH
+		</div>
+		<div>
+			{% if notification is defined %}
+			<div class="alert alert-danger">
+				<strong>{{notification}}</strong> 
+			</div>
+			{% endif %}
+			<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="center">
+							<label class="position-relative">
+								<input type="checkbox" id="select_all" class="ace" />
+								<span class="lbl"></span>
+							</label>
+						</th>
+						<th>Tiêu đề</th>
+						<th>Hình ảnh</th>
+						<th>Slider</th>
+						<th>Control</th>
+					</tr>
+				</thead>
+				{% for c in post %}
+				<tbody>
+					<td class="center">
+						<input type="checkbox" id="select" class="ace" />
+						<span class="lbl"></span>
+					</td>
+					<td>{{c.title_vi}} </td>
+					<td align="center" ><img src="{{c.images}}" width="160px"/></td>
+					{%if c.slider == 1 %}
+					<td align="center">Hien thi</td>
+					{%else%}
+					<td align="center">Khong hien thi</td>
+					{%endif%}
+					<td><div class="hidden-sm hidden-xs action-buttons">
+						<a class="red" onclick="javascript:Del('/admin/post/deleted/{{c.id}}')" href="javascript:void(0)" class="tooltip-success" data-rel="tooltip" title="Delete">
+							<i class="glyphicon glyphicon-trash bigger-130"></i>
+						</a>
+						<a class="green" href="/admin/post/updated/{{c.id}}">
+							<i class="ace-icon fa fa-pencil bigger-130"></i>
+						</a>
+					</div></td>
+				</tbody>
+				{% endfor %}
+			</table>
+
+		</div>
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+
+{% endblock %}

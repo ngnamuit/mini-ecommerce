@@ -1,0 +1,7 @@
+diff a/web/.htaccess b/web/.htaccess	(rejected hunks)
+@@ -1,4 +1,5 @@
+ <IfModule mod_rewrite.c>
++    Options -MultiViews
+ 
+     RewriteEngine On
+ 

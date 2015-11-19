@@ -1,0 +1,156 @@
+{%extends 'default/layout/block.html.twig' %}
+{%block slider%}
+    <section id="slider"><!--slider-->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+              <li data-target="#slider-carousel" data-slide-to="1"></li>
+              <li data-target="#slider-carousel" data-slide-to="2"></li>
+            </ol>            
+            <div class="carousel-inner">
+              <div class="item active">
+                <div class="col-sm-6">
+                  <h1><span>E</span>-SHOPPER</h1>
+                  <h2>Free E-Commerce Template</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                  <button type="button" class="btn btn-default get">Get it now</button>
+                </div>
+                <div class="col-sm-6">
+                  <img src="styles/website/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+                  <img src="styles/website/images/home/pricing.png"  class="pricing" alt="" />
+                </div>
+              </div>
+              <div class="item">
+                <div class="col-sm-6">
+                  <h1><span>E</span>-SHOPPER</h1>
+                  <h2>100% Responsive Design</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                  <button type="button" class="btn btn-default get">Get it now</button>
+                </div>
+                <div class="col-sm-6">
+                  <img src="styles/website/images/home/girl2.jpg" class="girl img-responsive" alt="" />
+                  <img src="styles/website/images/home/pricing.png"  class="pricing" alt="" />
+                </div>
+              </div>
+              
+              <div class="item">
+                <div class="col-sm-6">
+                  <h1><span>E</span>-SHOPPER</h1>
+                  <h2>Free Ecommerce Template</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                  <button type="button" class="btn btn-default get">Get it now</button>
+                </div>
+                <div class="col-sm-6">
+                  <img src="styles/website/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+                  <img src="styles/website/images/home/pricing.png" class="pricing" alt="" />
+                </div>
+              </div>
+              
+            </div>            
+            <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+              <i class="fa fa-angle-left"></i>
+            </a>
+            <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section><!--/slider-->
+{%endblock%}
+{%block content%}
+<section>
+    <div class="container">
+      <div class="row">
+        {%block sidebar%} {{render(url('sidebar'))}} {%endblock%}
+        {%block value%} 
+          <div class="col-sm-9 padding-right">
+            {%for c in cate %}
+            <div class="features_items"><!--features_items-->
+                <h2 class="category-tab">
+                    <ul class="nav nav-tabs"><li class="active"><a>{{c.name}}</a></li></ul>
+                </h2>
+                {%for pro in products%}
+                    {%if c.id == pro.cate %}
+                        <div class="col-sm-4">
+                          <div class="product-image-wrapper">
+                            <div class="single-products">
+                              <div class="productinfo text-center">
+                                <a href="{{url('view_Products',{'cate':c.target,'product':pro.target})}}">
+                                    <img src="{{pro.images}}" alt="{{pro.name}}" />                                   
+                                </a>
+                                <h2>
+                                  {{pro.price}} VND
+                                </h2>
+                                <p>{{pro.name}}</p>
+                                <button class="btn btn-default add-to-cart" id="add-to-cart" data-toggle="modal" data-target="#myModal{{pro.id}}" value="{{pro.id}}">
+                                    <i class="fa fa-shopping-cart" ></i>Add to cart
+                                    <input type="hidden" id="cart" value ="{{user}}" >
+                                </button>
+                                <!-- Modal -->
+                                {%if user != ''%}
+                                  <div class="modal fade" id="myModal{{pro.id}}" role="dialog">
+                                      <div class="modal-dialog">
+                                        
+                                        <div class="modal-content">
+                                          <div class="modal-body">
+                                            <img src="{{pro.images}}">
+                                            <div class="modal-body-info">
+                                                <p>{{pro.name}}</p>
+                                                <h2>{{pro.price}} VND</h2>
+                                            </div>
+                                            <div class="clear"></div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                                {%endif%}
+                              </div>
+                              <!-- Modal -->
+                              <img src="styles/website/images/home/new.png" class="new" alt="" />
+                            </div>
+                          </div>
+                        </div>
+                    {%endif%}
+                {%endfor%}     
+          </div><!--features_items-->
+          {%endfor%}
+        </div>
+
+        {%endblock%}
+      </div>
+    </div>
+  </section>
+ 
+  <script>
+    $(document).ready(function(){
+        $("button#add-to-cart").click(function(){
+               var user = $('#cart').val();
+
+               if(user == ''){
+                 window.location.replace('/login');
+               }else{
+
+                   var value = "id =" + $(this).val();    
+                   $.ajax({
+                      type: "Post",
+                      url: "pay/addcart.php",
+                      data: value,
+                      cache: false,
+                      success:  function(html){
+                        
+                      }
+                  });
+             }
+        });
+    });
+</script>
+{%endblock%}

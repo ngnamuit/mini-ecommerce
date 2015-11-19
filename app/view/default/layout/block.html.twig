@@ -1,0 +1,27 @@
+{%extends 'default/layout.html.twig'%}
+{%block head%}
+<!--header-->
+    <div class="header_top"> {{ render(url('headertop')) }}</div><!--/header_top-->
+    <div class="header-middle"> {{render(url('headermid'))}}  </div><!--/header-middle-->
+    <div class="header-bottom"><!--header-bottom-->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-9">
+            {{render(url('menu_main'))}}
+          </div>
+          <div class="col-sm-3">
+            <div class="search_box pull-right">
+              <input type="text" placeholder="Search"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!--/header-bottom-->
+  <!--/header-->
+{%endblock%}
+{%block slider%}{%endblock%}
+{%block content%}
+        {%block sidebar%}{%endblock%}
+        {%block value%}{%endblock%} 
+{%endblock%}
+{%block footer%}{{render(url('footer'))}}{%endblock%}

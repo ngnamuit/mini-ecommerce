@@ -1,0 +1,107 @@
+{% extends 'admin/layout/index.html.twig' %}
+{% block content %}
+<div class="page-header">
+	<h1>
+	</h1>
+</div><!-- /.page-header -->
+<div class="row_cate">
+	<div class="col-xs-12">
+		<form class="form-horizontal" name="frmAddPost" id="frmAddPost" role="form" action="" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<div class="notification">
+					{% if notification is defined %}
+						{{notification}}
+					{% endif %}
+				</div>
+				</div>
+				{% for pro in product %}
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Ten san pham: *</label>
+					<div class="col-sm-9">
+						<input type="text" name="name" id="txtName" value="{{pro.name}}" class="col-xs-10 col-sm-6" required />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Hình ảnh: *</label>
+					<div class="col-sm-9">
+						{%if pro.name is not null%}
+							<img src="{{pro.images}}" style="width:90px;height:90px;"><br>
+						{%endif%}
+						<strong>Kích thước:</strong> Rộng 420px  - Cao 250px<br />
+						<input id="linkimages" name="images" value="" class="col-xs-10 col-sm-5" type="text">
+						<span class="input-group-btn">
+							<button class="btn btn-sm btn-default" type="button" id="btnimages" onclick="BrowseServerList('linkimages');">
+								<i class="ace-icon glyphicon glyphicon-upload bigger-110"></i>
+								Browser
+							</button>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Mau sac: </label>
+					<div class="col-sm-9">
+						<input type="text" name="color" id="txtName" value="{{pro.color}}" class="col-xs-10 col-sm-6" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">So luong: </label>
+					<div class="col-sm-9">
+						<input type="text" name="num" id="txtName" value="{{pro.num}}" class="col-xs-10 col-sm-6" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Nuoc san xuat: </label>
+					<div class="col-sm-9">
+						<input type="text" name="made" id="txtName" value="{{pro.made}}" class="col-xs-10 col-sm-6" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Gia: </label>
+					<div class="col-sm-9">
+						<input type="text" name="price" id="txtName" value="{{pro.price}}" class="col-xs-10 col-sm-6" />
+					</div>
+				</div>
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<input type="hidden" name="token" value="{Security::setToken('token_form')}" />
+						<input type="hidden" name="update" value="update" />
+						<button class="btn btn-info" type="submit" onclick="return btnAdd_onclick();">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+							Cap nhat
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<button class="btn" type="reset">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							Reset
+						</button>
+					</div>
+				</div>
+				{%endfor%}
+			</form>
+		</div><!-- /.col -->
+	</div><!-- /.row -->
+	<script type="text/javascript">
+	function btnAdd_onclick(){
+		if(test_empty($('#txtName').val()))
+		{
+			alert('Vui lòng nhập Tiêu đề');document.frmAddPost.txtName.focus();return false;
+		}
+		if(test_empty($('#linkimages').val())){
+			alert('Vui lòng chọn hình');document.frmAddPost.txtImages.focus();return false;
+		}
+		return true;
+	}
+	</script>
+<script type="text/javascript">
+var editor = CKEDITOR.replace( 'content', {
+    filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
+    filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images',
+    filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash',
+    filebrowserUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+    filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+    filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+});
+CKFinder.setupCKEditor( editor, '../' );
+</script>
+{% endblock %}

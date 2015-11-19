@@ -1,0 +1,81 @@
+{% extends 'admin/layout/index.html.twig' %}
+{% block content %}
+<div class="page-header">
+	<h1>
+		Thành viên quản trị
+	</h1>
+</div><!-- /.page-header -->
+<div class="col-xs-12">
+	<div>
+		<form class="form-horizontal" role="form" name="frmContact" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<div class="notification">
+					{% if notification is defined %}
+					{{notification}}
+					{% endif %}</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Username: *</label>
+					<div class="col-sm-9">
+						<input name="txtUsername" id="txtUser" readonly="readonly" value="{{username}}" class="col-xs-10 col-sm-4" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Fullname: *</label>
+					<div class="col-sm-9">
+						<input name="fullname" id="fullname" value="{{fullname}}" class="col-xs-10 col-sm-4" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">New Password: </label>
+					<div class="col-sm-9">
+						<input name="txtPass" id="txtPass" class="col-xs-10 col-sm-4" type="password">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Re-Password: </label>
+					<div class="col-sm-9">
+						<input name="re-txtPass" id="re-txtPass" class="col-xs-10 col-sm-4" type="password">
+					</div>
+				</div>
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<input name="token" value="xLMJBgcN8c5Aw1xkzJ9J" type="hidden">
+						<input name="update" value="update" type="hidden">
+						<button onclick="return btnRegistry_onclick();" class="btn btn-info" type="submit">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+							Submit
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<button class="btn" type="reset">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							Reset
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div><!-- /.col -->
+	<script type="text/javascript">
+	function btnRegistry_onclick(){
+		if(test_empty($('#txtPass').val())){
+			alert('Vui lòng nhập Mật khẩu');document.frmContact.txtPass.focus();return false;
+		}
+		if(test_empty($('#fullname').val())){
+			alert('Bạn buộc phải nhập tên');document.frmContact.fullname.focus();return false;
+		}
+		if(($('#txtPass').val().length)<6){
+			alert('Mật khẩu không được dưới 6 kí tự');document.frmContact.txtPass.focus();return false;
+		}
+		if(test_empty($('#re-txtPass').val())){
+			alert('Vui lòng xác nhận lại mật khẩu');document.frmContact.txtPass.focus();return false;
+		}
+		if($('#re-txtPass').val()!=$('#txtPass').val())
+		{
+			alert('Hai mật khẩu nhập không chính giống nhau');document.frmContact.txtPass.focus();return false;
+		}
+		return true;
+	}
+	</script>
+
+	{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'admin/layout/index.html.twig' %}
+{% block content %}
+<div class="page-header">
+	<h1>
+		
+	</h1>
+</div><!-- /.page-header -->
+<div class="row_cate">
+	<div class="col-xs-12">
+		{% if notification is defined %}
+		<div class="alert alert-danger">
+			<strong>{{notification}}</strong> 
+		</div>
+		{% endif %}
+		{%for c in category %}
+			<form class="form-horizontal" name="frmContact" role="form" action="" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Tên loai:</label>
+					<div class="col-sm-9">
+						<input type="text" name="name" value="{{c.name}}" class="col-xs-10 col-sm-6" />
+					</div>
+				</div>
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<input type="hidden" name="updated" value="updated" />
+						<button class="btn btn-info" type="submit">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+							Submit
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<button class="btn" type="reset">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							Reset
+						</button>
+					</div>
+				</div>
+			</form>
+			{%endfor%}
+		</div><!-- /.row -->
+	</div>
+	<script type="text/javascript">
+	function btnRegistry_onclick(){
+		if(test_empty($('#txtPass').val())){
+			alert('Vui lòng nhập Mật khẩu');document.frmContact.txtPass.focus();return false;
+		}
+		if(($('#txtPass').val().length)<6){
+			alert('Mật khẩu không được dưới 6 kí tự');document.frmContact.txtPass.focus();return false;
+		}
+		if(test_empty($('#re-txtPass').val())){
+			alert('Vui lòng xác nhận lại mật khẩu');document.frmContact.txtPass.focus();return false;
+		}
+		if($('#re-txtPass').val()!=$('#txtPass').val())
+		{
+			alert('Hai mật khẩu nhập không chính giống nhau');document.frmContact.txtPass.focus();return false;
+		}
+		return true;
+	}
+	</script>
+
+	{% endblock %}

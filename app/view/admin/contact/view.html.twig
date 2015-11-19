@@ -1,0 +1,89 @@
+{% extends 'admin/layout/index.html.twig' %}
+{% block content %}
+<div class="page-header">
+	<h1>
+		{{control}}
+	</h1>
+</div>
+<div class="row-config">
+	{% for c in contact %}
+	<div class="col-xs-12">
+		<form class="form-horizontal" name="frmUpdateProduct" id="frmUpdateProduct" role="form" action="" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<div class="notification">
+					{% if notification is defined %}
+					{{notification}}
+					{% endif %}</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Name: </label>
+					<div class="col-sm-9">
+						<input type="text" name="name_vi" id="txtName" value="{{c.name}}" class="col-xs-10 col-sm-9" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Address: </label>
+					<div class="col-sm-9">
+						<input type="text" name="name_en" id="txtName" value="{{c.address}}" class="col-xs-10 col-sm-9" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Email: </label>
+					<div class="col-sm-9">
+						<input type="text" name="name_ja" id="txtName" value="{{c.email}}" class="col-xs-10 col-sm-9" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Title: </label>
+					<div class="col-sm-9">
+						<input type="text" name="name_cn" id="txtName" value="{{c.title}}" class="col-xs-10 col-sm-9" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Content: </label>
+					<div class="col-sm-9">
+						<input type="text" name="name_cn" id="txtName" value="{{c.content}}" class="col-xs-10 col-sm-9" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Phone: </label>
+					<div class="col-sm-9">
+						<input type="text" name="name_cn" id="txtName" value="{{c.phone}}" class="col-xs-10 col-sm-9" required />					
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Updated: </label>
+					<div class="col-sm-9">
+						<input type="text" name="name_cn" id="txtName" value="{{c.updated}}" class="col-xs-10 col-sm-9" required />
+					</div>
+				</div>
+		</form>
+				<div class="clearfix">
+					<div class="col-md-offset-3 col-md-9">
+					<a href="{{url('list_contact')}}">
+						<button class="btn btn-info" type="submit">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+							Back
+						</button>
+					</a>
+					</div>
+				</div>
+
+				
+
+	</div><!-- /.col -->
+	{% endfor %}
+</div><!-- /.row -->
+<script type="text/javascript">
+function btnRegistry_onclick(){
+	if(test_empty($('#txtHotline').val())){
+		alert('Vui lòng nhập Số hotline');document.frmContact.txtHotline.focus();return false;
+	}
+	if(test_empty($('#txtContent').val())){
+		alert('Vui lòng nhập Thông tin liên hệ');document.frmContact.txtContent.focus();return false;
+	}
+	return true;
+}
+</script>
+
+{% endblock %}

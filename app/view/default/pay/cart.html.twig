@@ -1,0 +1,92 @@
+{%extends 'default/layout/block.html.twig' %}
+{%block content%}
+<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="{{url('index')}}">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						{%if products is defined %}
+						{%for pro in products%}
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="{{pro.images}}}" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">{{pro.name}}</a></h4>
+								<p>Web ID: 1089772</p>
+							</td>
+							<td class="cart_price">
+								<p>{{pro.price}} VND</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<button class="cart_quantity_up" value="{{pro.quantity}}"> + </button>
+									<input class="cart_quantity_input" type="text" name="quantity" value="{{pro.quantity}}" autocomplete="off" size="2" disabled>
+									<button class="cart_quantity_down" > - </button>
+									<input type="hidden" value="{{pro.price}}" class="price">
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">{{pro.price}}</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						{%endfor%}
+						{%else%}
+							<td >Hien chua co san pham nao</td>
+						{%endif%}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+	<script type="text/javascript">
+		 $(document).ready(function(){
+		 		$('button.cart_quantity_up').click(function(){
+		 			var counter = $(this).val();
+		 			if(counter<10)
+		 				counter++;
+		 			
+		 			$(this).parent().find('input.cart_quantity_input').val(counter);
+		 			$(this).parent().find('button.cart_quantity_down').val(counter);
+		 			$(this).val(counter);
+                	// $("input.input.cart_quantity_input").val(counter);
+                	var price = $(this).parent().find('input.price').val();
+		 			price = price * counter ;
+                	$(this).parent().parent().parent().find('.cart_total .cart_total_price').text(price);
+		 		});
+		 		$('button.cart_quantity_down').click(function(){
+		 			var counter = $(this).val();
+		 			if(counter>1)
+		 				counter--;
+		 			else
+		 				counter = 1;
+
+		 			$(this).parent().find('input.cart_quantity_input').val(counter);
+		 			$(this).parent().find('button.cart_quantity_up').val(counter);
+		 			$(this).val(counter);
+                	var price = $(this).parent().find('input.price').val();
+		 			price = price * counter ;
+                	$(this).parent().parent().parent().find('.cart_total .cart_total_price').text(price);
+		 		});
+		 });
+	</script>
+{%endblock%}

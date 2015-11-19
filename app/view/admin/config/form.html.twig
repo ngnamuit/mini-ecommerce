@@ -1,0 +1,198 @@
+{% extends 'admin/layout/index.html.twig' %}
+{% block content %}
+<div class="page-header">
+	<h1>
+		{{control}}
+	</h1>
+</div>
+<div class="row-config">
+	{% for c in config %}
+	<div class="col-xs-12">
+		<div>
+			<div class="notification">
+			{% for message in app.session.getFlashBag.get('message') %}
+  			<script>alert('{{ message }}')</script>
+  			{% endfor %}</div>
+			</div>
+			<form class="form-horizontal" role="form" name="frmContact" action="{{ url('config') }}" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Tên công ty Vi: *</label>
+					<div class="col-sm-9">
+						<input type="hidden" name="id" value="{{c.id}}" />
+						<input type="text" name="name_vi" id="name_vi" value="{{c.name_vi}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Tên công ty En: *</label>
+					<div class="col-sm-9">
+						<input type="hidden" name="id" value="{{c.id}}" />
+						<input type="text" name="name_en" id="name_en" value="{{c.name_en}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Tên công ty Ja: *</label>
+					<div class="col-sm-9">
+						<input type="hidden" name="id" value="{{c.id}}" />
+						<input type="text" name="name_ja" id="name_ja" value="{{c.name_ja}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Tên công ty Cn: *</label>
+					<div class="col-sm-9">
+						<input type="hidden" name="id" value="{{c.id}}" />
+						<input type="text" name="name_cn" id="name_cn" value="{{c.name_cn}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Công ty Vi: *</label>
+					<div class="col-sm-9">
+						<textarea name="content_vi" class="ckeditor" rows="7" id="txtContent">{{c.content_vi}}</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Công ty En: *</label>
+					<div class="col-sm-9">
+						<textarea name="content_en" class="ckeditor" rows="7" id="txtContent">{{c.content_en}}</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Công ty Ja: *</label>
+					<div class="col-sm-9">
+						<textarea name="content_ja" class="ckeditor" rows="7" id="txtContent">{{c.content_ja}}</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Công ty Cn: *</label>
+					<div class="col-sm-9">
+						<textarea name="content_cn" class="ckeditor" rows="7" id="txtContent">{{c.content_cn}}</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Image Chi nhánh: *</label>
+					<div class="col-sm-9">
+						{%if c.images !=NULL %}
+						<img src="{{c.images}}" width="180" alt="image" >
+						{%endif%}
+						<br>
+						<strong>Kích thước:</strong> Rộng 200px<br>
+						<input id="linkimages" name="images" value="{{c.images}}" class="col-xs-10 col-sm-5" type="text">
+						<span class="input-group-btn">
+							<button class="btn btn-sm btn-default" type="button" id="btnimages" onclick="BrowseServerList('linkimages');">
+								<i class="ace-icon glyphicon glyphicon-upload bigger-110"></i>
+								Browser
+							</button>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Mô tả chi nhanh Vi:</label>
+					<div class="col-sm-9">
+						<input type="text" name="info_vi" id="info" value="{{c.info_vi}}" class="col-xs-10 col-sm-10" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Mô tả chi nhanh En:</label>
+					<div class="col-sm-9">
+						<input type="text" name="info_en" id="info" value="{{c.info_en}}" class="col-xs-10 col-sm-10" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Mô tả chi nhanh ja:</label>
+					<div class="col-sm-9">
+						<input type="text" name="info_ja" id="info" value="{{c.info_ja}}" class="col-xs-10 col-sm-10" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Mô tả chi nhanh cn:</label>
+					<div class="col-sm-9">
+						<input type="text" name="info_cn" id="info_cn" value="{{c.info_cn}}" class="col-xs-10 col-sm-10" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Google Analysis: *</label>
+					<div class="col-sm-9">
+						<input type="hidden" name="id" value="{{c.id}}" />
+						<input type="text" name="google_analysis" id="google_analysis" value="{{c.google_analysis}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Hotline: *</label>
+					<div class="col-sm-9">
+						<input type="hidden" name="id" value="{{c.id}}" />
+						<input type="text" name="hotline" id="hotline" value="{{c.hotline}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Facebook: *</label>
+					<div class="col-sm-9">
+						
+						<input type="text" name="facebook" id="facebook" value="{{c.facebook}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Google: *</label>
+					<div class="col-sm-9">
+						
+						<input type="text" name="google" id="google" value="{{c.google}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Twitter: *</label>
+					<div class="col-sm-9">
+						
+						<input type="text" name="twitter" id="twitter" value="{{c.twitter}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Instagram: *</label>
+					<div class="col-sm-9">
+						
+						<input type="text" name="instagram" id="instagram" value="{{c.instagram}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Youtube: *</label>
+					<div class="col-sm-9">
+						
+						<input type="text" name="youtube" id="youtube" value="{{c.youtube}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">Map: *</label>
+					<div class="col-sm-9">
+						<input type="text" name="map" id="map" value="{{c.map}}" class="col-xs-10 col-sm-5" />
+					</div>
+				</div>
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-3 col-md-9">
+						<input type="hidden" name="update" value="update" />
+						<button onclick="return btnRegistry_onclick();" class="btn btn-info" type="submit">
+							<i class="ace-icon fa fa-check bigger-110"></i>
+							Submit
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<button class="btn" type="reset">
+							<i class="ace-icon fa fa-undo bigger-110"></i>
+							Reset
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div><!-- /.col -->
+	{% endfor %}
+</div><!-- /.row -->
+<script type="text/javascript">
+function btnRegistry_onclick(){
+	if(test_empty($('#txtHotline').val())){
+		alert('Vui lòng nhập Số hotline');document.frmContact.txtHotline.focus();return false;
+	}
+	if(test_empty($('#txtContent').val())){
+		alert('Vui lòng nhập Thông tin liên hệ');document.frmContact.txtContent.focus();return false;
+	}
+	return true;
+}
+</script>
+
+{% endblock %}

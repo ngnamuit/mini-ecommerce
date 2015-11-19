@@ -1,0 +1,7 @@
+{% extends 'admin/layout/index.html.twig' %}
+{% block content %}
+  {% for message in app.session.getFlashBag.get('message') %}
+  <script>alert('{{ message }}')</script>
+  {% endfor %}
+<h3 style="margin-left:50px;color:red;">Hệ Thống Quản Lý Website</h3>
+{% endblock %}

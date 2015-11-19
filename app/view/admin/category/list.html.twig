@@ -1,0 +1,45 @@
+{% extends 'admin/layout/index.html.twig' %}
+{% block content %}
+
+<div class="page-header">
+	<h1>
+		{{control}}
+	</h1>
+
+	{% for category_update in app.session.getFlashBag.get('category_update') %}
+	<script>alert('{{ category_update }}')</script>
+	{% endfor %}
+</div><!-- /.page-header -->
+<div class="row_cate">
+	<div class="col-xs-12">
+		<div class="table-header">
+			DANH SÁCH
+			<a style="float:right;color:#fff;margin-right:10px;" href="{{url('Add_category')}}"<span>Thêm loai </span></a>
+		</div>
+		<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Loai san pham</th>
+					<th>Control</th>
+				</tr>
+			</thead>
+			{% for c in category %}
+			<tbody>
+				<td>{{c.name}}</td>				
+					<td><div class="hidden-sm hidden-xs action-buttons">
+						<a class="green" href="{{url('Updated_category',{'id':c.id})}}">
+							<i class="ace-icon fa fa-pencil bigger-130"></i>
+						</a>
+						<a class="blue" href="{{url('list_Products',{'idcate':c.id})}}">
+							<i class="ace-icon glyphicon glyphicon-list bigger-130"></i>
+						</a>
+						
+					</div></td>
+				</tbody>
+				{% endfor %}
+			</table>
+
+		</div>
+	</div><!-- /.col -->
+</div><!-- /.row -->
+{% endblock %}
