@@ -96,13 +96,17 @@
                                 {%if user != ''%}
                                   <div class="modal fade" id="myModal{{pro.id}}" role="dialog">
                                       <div class="modal-dialog">
-                                        
+                                       
                                         <div class="modal-content">
+                                           <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title txtgreen" id="myModalLabel">Bạn đã thêm 1 sản phẩm vào giỏ hàng của mình</h4>
+                                          </div>
                                           <div class="modal-body">
                                             <img src="{{pro.images}}">
                                             <div class="modal-body-info">
-                                                <p>{{pro.name}}</p>
-                                                <h2>{{pro.price}} VND</h2>
+                                                <h4>{{pro.name}}</h4>
+                                                <h2>Giá : {{pro.price}} VND</h2>
                                             </div>
                                             <div class="clear"></div>
                                           </div>

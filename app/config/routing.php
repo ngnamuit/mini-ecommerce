@@ -37,9 +37,10 @@ return array(
     ),
     '/' => array(
         '/' => 'website\HomeController:index:index',
-
+       
         'pay/cart' => 'website\PayController:cart:cart',
         'pay/addcart.php' => 'website\PayController:AddCart:addcart',
+        'pay/removecart.php' => 'website\PayController:RemoveCart:removecart',
 
         'block/menu' => 'website\BlockController:menu:menu_main',
         'block/sidebar' => 'website\BlockController:sidebar:sidebar',

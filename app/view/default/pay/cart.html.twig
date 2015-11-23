@@ -23,9 +23,9 @@
 					<tbody>
 						{%if products is defined %}
 						{%for pro in products%}
-						<tr>
+						<tr id="{{pro.id}}">
 							<td class="cart_product">
-								<a href=""><img src="{{pro.images}}}" alt=""></a>
+								<a href=""><img src="{{pro.images}}" alt=""></a>
 							</td>
 							<td class="cart_description">
 								<h4><a href="">{{pro.name}}</a></h4>
@@ -43,20 +43,33 @@
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">{{pro.price}}</p>
+								<p class="cart_total_price">{{pro.total}}</p>
 							</td>
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" >
+									<i class="fa fa-times"></i>
+									<input type="hidden" id="id" value="{{pro.id}}" >
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								<a target="_blank" href="https://www.nganluong.vn/button_payment.php?receiver=ngnamuit@gmail.com &product_name={{pro.name}} &price= {{pro.total}} &return_url= {{url('index')}} &comments='a'  " >
+								<img src="https://www.nganluong.vn/data/images/buttons/11.gif"  border="0" /></a>
 							</td>
 						</tr>
 						{%endfor%}
 						{%else%}
 							<td >Hien chua co san pham nao</td>
 						{%endif%}
+						
 					</tbody>
+
 				</table>
 			</div>
 		</div>
+		
+		
 	</section> <!--/#cart_items-->
 	<script type="text/javascript">
 		 $(document).ready(function(){
@@ -85,7 +98,24 @@
 		 			$(this).val(counter);
                 	var price = $(this).parent().find('input.price').val();
 		 			price = price * counter ;
-                	$(this).parent().parent().parent().find('.cart_total .cart_total_price').text(price);
+                	$(this).parent().parent().parent().find('.cart_delete .cart_total_price').text(price);
+		 		});
+		 		$('.cart_delete').click(function(){
+		 			
+		 				var id = "id =" + $(this).find('#id').val();
+		 				$(this).parent().addClass('hidden');
+		 				$.ajax({
+		 					  type: "Post",
+		                      url: "removecart.php",
+		                      data: id,
+		                      cache: false,
+		                      success:  function(html){
+		                      	
+		                      }
+		 				});
+		 			
+		 			 
+
 		 		});
 		 });
 	</script>
