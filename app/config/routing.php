@@ -48,12 +48,11 @@ return array(
         'block/headertop' => 'website\BlockController:headertop:headertop',
         'block/headermid' => 'website\BlockController:headermid:headermid',
 
-        '/login' => 'website\HomeController:login:login',
-        '/logout' => 'website\HomeController:logout:logout',
+        '/login' => 'website\UserController:login:login',
+        '/logout' => 'website\UserController:logout:logout',
+        '/register' => 'website\UserController:register:register',
 
         '/{cate}/{product}'=>'website\ProductsController:view:view_Products',
-
-        
 
     ),
     

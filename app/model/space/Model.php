@@ -14,10 +14,16 @@ class Model extends Base
             return true;
         return false;
     }
-     public function CheckUser($table,$user,$pass){
+    public function CheckUser($table,$user,$pass){
         $pass=md5($pass);
         $user = DB::table($table)->where('username','=',$user)->first();
         if($user->password==$pass&&$user->password!='')
+            return true;
+        return false;
+    }
+    public function issetUser($table,$user){
+        $user = DB::table($table)->where('username','=',$user)->first();
+        if(isset($user->id))
             return true;
         return false;
     }

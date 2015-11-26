@@ -5,9 +5,6 @@ use App\Model\admin\Auth;
 class AdminController extends AuthController {
     function __construct(){
         parent::__construct();
-        if($this->app['session']->get('admin','')==''){
-            $this->CheckAction();
-        }
     }
     public function indexAction() {
         return $this->redirect('login-admin');
