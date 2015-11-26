@@ -11,7 +11,7 @@ class HomeController extends Base
         $data['cate']= Model::getAll('cate');
         $data['user'] = $this->app['session']->get('user','');
         // $this->app['session']->remove('cart_'.$data['user']);
-        dump($this->app['session']->get('re',''));
+        // dump($this->app['session']->get('re',''));
         return $this->render('default/home/home.html.twig', $data);
     }
     

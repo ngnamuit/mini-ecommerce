@@ -23,6 +23,7 @@
 					<tbody>
 						{%if products is defined %}
 						{%for pro in products%}
+
 						<tr id="{{pro.id}}">
 							<td class="cart_product">
 								<a href=""><img src="{{pro.images}}" alt=""></a>
@@ -69,21 +70,21 @@
 								Tổng tiền : <span class="price_total"></span>
 							</h4>
 							<form id="baokim_pay" action="https://www.baokim.vn/payment/product/version11" method="get" style="float:right">
-                                    <input type="hidden" class="business_form" name="business_form" value="namdeptrai@gmail.com">
-                                    <input type="hidden" class="product_name_form" name="product_name_form" value="18810000">
+                                    <input type="hidden" class="business_form" name="business" value="namdeptrai@gmail.com">
+                                    <input type="hidden" class="product_name_form" name="product_name" value="18810000">
 
                                     <input type="hidden" class="product_price_form" name="product_price_form" value="18810000">
 
-                                    <input type="hidden" class="product_quantity_form" name="product_quantity_form" value="1">
+                                    <input type="hidden" class="product_quantity_form" name="product_quantity" value="1">
 
-                                    <input type="hidden" class="total_amount_form" name="total_amount_form" value="18810000">
+                                    <input type="hidden" class="total_amount_form" name="total_amount" value="18810000">
 
-                                    <input type="hidden" class="url_detail_form" name="url_detail_form" value="">
+                                    <input type="hidden" class="url_detail_form" name="url_detail" value="">
 
-                                    <input type="hidden" class="url_success_form" name="url_success_form" value="">
+                                    <input type="hidden" class="url_success_form" name="url_success" value="">
 
-                                    <input type="hidden" class="url_cancel_form" name="url_cancel_form" value="">
-                                    <input type="hidden" class="order_description_form" name="order_description_form" value="">
+                                    <input type="hidden" class="url_cancel_form" name="url_cancel" value="">
+                                    <input type="hidden" class="order_description_form" name="order_description" value="">
                                     <input type="hidden" name="id" value="">
                                     <input type="image" src="http://www.baokim.vn/developers/uploads/baokim_btn/thanhtoanantoan-s.png" border="0" name="submit" alt="Thanh toán an toàn với Bảo Kim !" title="Thanh toán trực tuyến an toàn dùng tài khoản Ngân hàng (VietcomBank, TechcomBank, Đông Á, VietinBank, Quân Đội, VIB, SHB,... và thẻ Quốc tế (Visa, Master Card...) qua Cổng thanh toán trực tuyến BảoKim.vn">
                                 </form>
@@ -106,7 +107,7 @@
 		 		}
 
 		 		$('.price_total').text(sum_total_price);
-		 		$('product_price_form').val(sum_total_price);
+		 		$('.total_amount_form').val(sum_total_price);
 
 
 		 		// + click action
@@ -135,7 +136,7 @@
 				 			$(this).parent().find('button.cart_quantity_down').val(counter);
 				 			$(this).val(counter);
 				 			//gia san pham
-				 			$('.product_price_form').val(sum_total_price);
+				 			$('.total_amount_form').val(sum_total_price);
 		              
 				 		});
 				 		$('button.cart_quantity_down').click(function(){
@@ -156,7 +157,7 @@
 				 			$(this).parent().find('button.cart_quantity_up').val(counter);
 				 			$(this).val(counter);
 
-		                	$('. product_price_form').val(sum_total_price);
+		                	$('.total_amount_form').val(sum_total_price);
 		                	
 				 		});				
 				 		$('.cart_delete').click(function(){
@@ -175,7 +176,7 @@
 					                      	
 					                      }
 					 				});	
-					 			$('.product_price_form').val(sum_total_price);
+					 			$('.total_amount_form').val(sum_total_price);
 				 					 			 
 				 		});		 		
 		 });
