@@ -9,9 +9,7 @@ class HomeController extends Base
     {
         $data['products'] = Model::getAll('products');
         $data['cate']= Model::getAll('cate');
-        $data['user'] = $this->app['session']->get('user','');
-        // $this->app['session']->remove('cart_'.$data['user']);
-        // dump($this->app['session']->get('re',''));
+        $data['user'] = $this->app['session']->get('user','');        
         return $this->render('default/home/home.html.twig', $data);
     }
     

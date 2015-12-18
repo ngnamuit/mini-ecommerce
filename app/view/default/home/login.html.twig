@@ -10,12 +10,14 @@
             <form action="{{url('login')}}" method="post">
               <input type="name" name='name' placeholder="Name" />
               <input type="password" name='password' placeholder="Password"/>
+              <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
               <span>
                 <input type="checkbox" class="checkbox"> 
                 Keep me signed in
               </span>
               <h4>{%if notification_login is defined%}{{notification_login}}{%endif%}</h4>
               <button type="submit" class="btn btn-default" name='login' value="login" >Login</button>
+              
             </form>
           </div><!--/login form-->
         </div>

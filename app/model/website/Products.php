@@ -22,7 +22,7 @@ class Products extends Base
         return false;
     }
     public function getProductsByAlias($alias) {
-        $Products = Products::where('target', '=', $alias)->get();
+        $Products = Products::where('target', '=', $alias)->first();
         if ($Products) return $Products;
         return false;
     }

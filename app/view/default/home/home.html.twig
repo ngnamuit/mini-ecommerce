@@ -1,5 +1,6 @@
 {%extends 'default/layout/block.html.twig' %}
 {%block slider%}
+
     <section id="slider"><!--slider-->
     <div class="container">
       <div class="row">
@@ -135,27 +136,5 @@
     </div>
   </section>
  
-  <script>
-    $(document).ready(function(){
-        $("button#add-to-cart").click(function(){
-               var user = $('#cart').val();
-
-               if(user == ''){
-                 window.location.replace('/login');
-               }else{
-
-                   var value = "id =" + $(this).val();    
-                   $.ajax({
-                      type: "Post",
-                      url: "pay/addcart.php",
-                      data: value,
-                      cache: false,
-                      success:  function(html){
-                        
-                      }
-                  });
-             }
-        });
-    });
-</script>
+  
 {%endblock%}

@@ -20,7 +20,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/styles/website/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/styles/website/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/styles/website/images/ico/apple-touch-icon-57-precomposed.png">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!--zoom images -->
+    <script src='/styles/website/js/jquery.elevatezoom.js'></script>
+
 </head><!--/head-->
 
 <body>
@@ -33,11 +36,37 @@
         {%block value%}{%endblock%}
     {%endblock%}
     {%block footer%}{%endblock%}
+
+    <script>
+        $(document).ready(function(){
+            $("button#add-to-cart").click(function(){
+                   var user = $('#cart').val();
+
+                   if(user == ''){
+                     window.location.replace('/login');
+                   }else{
+
+                       var value = "id =" + $(this).val();
+
+                       $.ajax({
+                          type: "Post",
+                          url: "/pay/addcart.php",
+                          data: value,
+                          cache: false,
+                          success:  function(html){
+                            
+                          }
+                      });
+                 }
+            });
+        });
+    </script>
     <script src="/styles/website/js/jquery.js"></script>
     <script src="/styles/website/js/bootstrap.min.js"></script>
     <script src="/styles/website/js/jquery.scrollUp.min.js"></script>
     <script src="/styles/website/js/price-range.js"></script>
     <script src="/styles/website/js/jquery.prettyPhoto.js"></script>
     <script src="/styles/website/js/main.js"></script>
+
 </body>
 </html>

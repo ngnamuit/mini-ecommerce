@@ -62,6 +62,24 @@ class PayController extends base
         }
         exit();
     }
+    public function UpdateCartAction(){
+        $user = $this->app['session']->get('user','');
+        $shopcart = $this->app['session']->get('cart_'.$user,'');
+        if($input = $this->getPostData()){           
+            for($i=0;$i<count($shopcart);$i++){
+                if($input['name_'] == $shopcart[$i]['name']){     
+                    $shopcart[$i]['quantity'] = $input['quantity_'];
+                    $shopcart[$i]['total'] = $shopcart[$i]['quantity'] * $shopcart[$i]['price'];
+                    $shopcart[$i]['total_price'] = $total_price = $shopcart[$i]['total_price'] + $shopcart[$i]['price'];
+                } 
+            }
+            $this->app['session']->set('cart_'.$user,$shopcart);
+        }
+        exit();   
+    }
+    public function SaveShopCartAction(){
+        
+    }
     function removeElementWithValue($array, $key, $value){
         foreach($array as $subKey => $subArray){
             if($subArray[$key] == $value){

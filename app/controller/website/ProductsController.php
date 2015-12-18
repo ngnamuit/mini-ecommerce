@@ -4,15 +4,14 @@ namespace App\Controller\website;
 use Sifoni\Controller\Base;
 use App\Model\website\Products;
 use App\Model\website\Category;
-use App\Model\website\Download;
-use App\Model\website\Contact;
-
+use App\Model\space\Model;
 class ProductsController extends Base
 {
     public function viewAction($cate,$product) {
 
         $data['Product'] = Products::getProductsByAlias($product);
-        if(isset($data['Product']->id)==false){
+        $data['user'] = $this->app['session']->get('user','');
+        if(!isset($data['Product']->id)){
             $data['notification'] = 'Sản phẩm không tồn tại';
         }
         return $this->render('default/Post/view.html.twig', $data);

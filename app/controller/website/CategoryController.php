@@ -8,5 +8,4 @@ use Sifoni\Model\DB;
 class CategoryController extends CommonController
 {
     
-    
 }

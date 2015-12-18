@@ -41,6 +41,7 @@ return array(
         'pay/cart' => 'website\PayController:cart:cart',
         'pay/addcart.php' => 'website\PayController:AddCart:addcart',
         'pay/removecart.php' => 'website\PayController:RemoveCart:removecart',
+        'pay/updatecart.php' => 'website\PayController:UpdateCart:updatecart',
 
         'block/menu' => 'website\BlockController:menu:menu_main',
         'block/sidebar' => 'website\BlockController:sidebar:sidebar',

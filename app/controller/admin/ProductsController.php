@@ -18,7 +18,7 @@ class ProductsController extends Base
         $data['Products'] = Model::getListProductById('products',$idcate);
         $data['idcate'] = $idcate;
         $data['title'] = 'Danh sach san pham';
-        $data['fullname'] = $nameAdmin = $this->app['session']->get('adminName', '1');
+        $data['fullname'] = $nameAdmin = $this->app['session']->get('admin', '');
         return $this->render('admin/post/list.html.twig', $data);
     }
     public function FormAction($idcate,$id='') {
